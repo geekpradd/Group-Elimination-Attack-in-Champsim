@@ -11,6 +11,7 @@
 #include <assert.h>
 #include <signal.h>
 #include <sys/types.h>
+#include <fstream>
 
 #include <iostream>
 #include <queue>

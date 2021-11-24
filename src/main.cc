@@ -1285,12 +1285,15 @@ for(int i=0; i<NUM_CPUS; i++)
         //     cout << i << " " << packets[i].address <<" " << way <<endl;
     }   
 
-    cout << "Demonstration of GE Algorithm " << endl;
-    cout << "First Index of Packet being missed is: " << first_i << endl;
+    ofstream out_file;
+    out_file.open("GE Attack/results.txt");
+
+    out_file << "Demonstration of GE Algorithm " << endl;
+    out_file << "First Index of Packet being missed is: " << first_i << endl;
     // cout << "\nNumber of Cache Misses: " << number_conflicts << endl;
 
-    cout << "Thus for this packet, there are enough packets in our set that can evict this particular data packet" << endl;
-    cout << "We will find a minimal set of WAY = 16 packets that will evict this packet using GE" << endl;
+    out_file << "Thus for this packet, there are enough packets in our set that can evict this particular data packet" << endl;
+    out_file << "We will find a minimal set of WAY = 16 packets that will evict this packet using GE" << endl;
 
     PACKET target = packets[first_i];
     int level = 0;
@@ -1352,26 +1355,26 @@ for(int i=0; i<NUM_CPUS; i++)
         }
         level++;
         if (!happen){
-            cout << "Unable to finish" << endl;
+            out_file << "Unable to finish" << endl;
             break;
         }
 
-        cout << "At iteration number " << level << " number of groups considered " << step << " and size of set after removing group " << (int) packets.size() << endl;
+        out_file << "At iteration number " << level << " number of groups tested " << step << " and size of set after removing group " << (int) packets.size() << endl;
        
     }
 
-    cout << "\nThus for address " << target.address << " the eviction set is " << endl;
+    out_file << "\nThus for address " << target.address << "\nThe eviction set is " << endl;
     for (int i=0; i<packets.size(); ++i){
-        cout << packets[i].address << endl;
+        out_file << packets[i].address << endl;
     }
 
-    cout << "Now we will prove that this set is indeed an eviction set. For this we will first the target and then read all these addresses, pushing them into the cache.\nThen we hit target at the end and see that its a miss, implying that it got evicted." << endl;
-    cout << "Then we will read target again, and then cyclically go through the set, checking for a hit and then reading it.\nIf all WAY+1 of these addresses belong to the same set, we must see misses for each address as reading the previous address will cause the next one to be evicted due to LRU policy" << endl;
+    out_file << "\nNow we will prove that this set is indeed an eviction set. For this we will first the target and then read all these addresses, pushing them into the cache.\nThen we hit target at the end and see that its a miss, implying that it got evicted." << endl;
+    out_file << "Then we will read target again, and then cyclically go through the set, checking for a hit and then reading it.\nIf all WAY+1 of these addresses belong to the same set, we must see misses for each address as reading the previous address will cause the next one to be evicted due to LRU policy" << endl;
 
     uncore.LLC[0]->add_rq(&target);
     uncore.LLC[0]->operate();
     uncore.DRAM.operate();
-    cout << "Read Target with Address " << target.address << endl;
+    out_file << "\nRead Target with Address " << target.address << endl;
 
     for (int i=0; i<packets.size(); ++i){
         
@@ -1379,12 +1382,12 @@ for(int i=0; i<NUM_CPUS; i++)
         uncore.LLC[0]->operate();
         uncore.DRAM.operate();
 
-        cout << "Read address " << packets[i].address << endl;
+        out_file << "Read address " << packets[i].address << endl;
     }   
     uncore.LLC[0]->operate();
     int way = uncore.LLC[0]->check_hit(&target, 0);
     if (way == -1) {
-        cout << "Missed Target! This means it got evicted!" << endl;
+        out_file << "Missed Target! This means it got evicted!" << endl;
     }
     uncore.LLC[0]->add_rq(&target);
     uncore.LLC[0]->operate();
@@ -1394,7 +1397,7 @@ for(int i=0; i<NUM_CPUS; i++)
         uncore.LLC[0]->operate();
         int way = uncore.LLC[0]->check_hit(&packets[i], 0);
         if (way == -1) {
-            cout << "Missed Address at index " << i << "! This means it got evicted!" << endl;
+            out_file << "Missed Address at index " << i << "! This means it got evicted!" << endl;
         }
 
         uncore.LLC[0]->add_rq(&packets[i]);
@@ -1403,7 +1406,7 @@ for(int i=0; i<NUM_CPUS; i++)
 
     } 
 
-    cout << "This verifies that we indeed got the eviction set" << endl;
+    out_file << "This verifies that we indeed got the eviction set" << endl;
 
     // ===================== END CODE ==========================
 

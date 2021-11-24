@@ -1,0 +1,199 @@
+Demonstration of GE Algorithm 
+First Index of Packet being missed is: 0
+Thus for this packet, there are enough packets in our set that can evict this particular data packet
+We will find a minimal set of WAY = 16 packets that will evict this packet using GE
+At iteration number 1 number of groups tested 1 and size of set after removing group 30841
+At iteration number 2 number of groups tested 1 and size of set after removing group 29027
+At iteration number 3 number of groups tested 1 and size of set after removing group 27320
+At iteration number 4 number of groups tested 1 and size of set after removing group 25713
+At iteration number 5 number of groups tested 1 and size of set after removing group 24201
+At iteration number 6 number of groups tested 1 and size of set after removing group 22778
+At iteration number 7 number of groups tested 4 and size of set after removing group 21439
+At iteration number 8 number of groups tested 4 and size of set after removing group 20178
+At iteration number 9 number of groups tested 7 and size of set after removing group 18992
+At iteration number 10 number of groups tested 8 and size of set after removing group 17875
+At iteration number 11 number of groups tested 7 and size of set after removing group 16824
+At iteration number 12 number of groups tested 2 and size of set after removing group 15835
+At iteration number 13 number of groups tested 4 and size of set after removing group 14904
+At iteration number 14 number of groups tested 3 and size of set after removing group 14028
+At iteration number 15 number of groups tested 7 and size of set after removing group 13203
+At iteration number 16 number of groups tested 9 and size of set after removing group 12427
+At iteration number 17 number of groups tested 9 and size of set after removing group 11696
+At iteration number 18 number of groups tested 10 and size of set after removing group 11008
+At iteration number 19 number of groups tested 11 and size of set after removing group 10361
+At iteration number 20 number of groups tested 1 and size of set after removing group 9752
+At iteration number 21 number of groups tested 11 and size of set after removing group 9179
+At iteration number 22 number of groups tested 7 and size of set after removing group 8640
+At iteration number 23 number of groups tested 5 and size of set after removing group 8132
+At iteration number 24 number of groups tested 7 and size of set after removing group 7654
+At iteration number 25 number of groups tested 4 and size of set after removing group 7204
+At iteration number 26 number of groups tested 8 and size of set after removing group 6781
+At iteration number 27 number of groups tested 9 and size of set after removing group 6383
+At iteration number 28 number of groups tested 10 and size of set after removing group 6008
+At iteration number 29 number of groups tested 12 and size of set after removing group 5655
+At iteration number 30 number of groups tested 12 and size of set after removing group 5323
+At iteration number 31 number of groups tested 7 and size of set after removing group 5010
+At iteration number 32 number of groups tested 4 and size of set after removing group 4716
+At iteration number 33 number of groups tested 3 and size of set after removing group 4439
+At iteration number 34 number of groups tested 12 and size of set after removing group 4178
+At iteration number 35 number of groups tested 8 and size of set after removing group 3933
+At iteration number 36 number of groups tested 2 and size of set after removing group 3702
+At iteration number 37 number of groups tested 10 and size of set after removing group 3485
+At iteration number 38 number of groups tested 4 and size of set after removing group 3280
+At iteration number 39 number of groups tested 11 and size of set after removing group 3088
+At iteration number 40 number of groups tested 11 and size of set after removing group 2907
+At iteration number 41 number of groups tested 12 and size of set after removing group 2736
+At iteration number 42 number of groups tested 13 and size of set after removing group 2576
+At iteration number 43 number of groups tested 9 and size of set after removing group 2425
+At iteration number 44 number of groups tested 4 and size of set after removing group 2283
+At iteration number 45 number of groups tested 5 and size of set after removing group 2149
+At iteration number 46 number of groups tested 6 and size of set after removing group 2023
+At iteration number 47 number of groups tested 3 and size of set after removing group 1904
+At iteration number 48 number of groups tested 2 and size of set after removing group 1792
+At iteration number 49 number of groups tested 5 and size of set after removing group 1687
+At iteration number 50 number of groups tested 8 and size of set after removing group 1588
+At iteration number 51 number of groups tested 7 and size of set after removing group 1495
+At iteration number 52 number of groups tested 8 and size of set after removing group 1408
+At iteration number 53 number of groups tested 9 and size of set after removing group 1326
+At iteration number 54 number of groups tested 11 and size of set after removing group 1248
+At iteration number 55 number of groups tested 8 and size of set after removing group 1175
+At iteration number 56 number of groups tested 11 and size of set after removing group 1106
+At iteration number 57 number of groups tested 10 and size of set after removing group 1041
+At iteration number 58 number of groups tested 2 and size of set after removing group 980
+At iteration number 59 number of groups tested 11 and size of set after removing group 923
+At iteration number 60 number of groups tested 11 and size of set after removing group 869
+At iteration number 61 number of groups tested 12 and size of set after removing group 818
+At iteration number 62 number of groups tested 5 and size of set after removing group 770
+At iteration number 63 number of groups tested 12 and size of set after removing group 725
+At iteration number 64 number of groups tested 13 and size of set after removing group 683
+At iteration number 65 number of groups tested 3 and size of set after removing group 643
+At iteration number 66 number of groups tested 6 and size of set after removing group 606
+At iteration number 67 number of groups tested 4 and size of set after removing group 571
+At iteration number 68 number of groups tested 7 and size of set after removing group 538
+At iteration number 69 number of groups tested 2 and size of set after removing group 507
+At iteration number 70 number of groups tested 12 and size of set after removing group 478
+At iteration number 71 number of groups tested 12 and size of set after removing group 450
+At iteration number 72 number of groups tested 6 and size of set after removing group 424
+At iteration number 73 number of groups tested 13 and size of set after removing group 400
+At iteration number 74 number of groups tested 5 and size of set after removing group 377
+At iteration number 75 number of groups tested 7 and size of set after removing group 355
+At iteration number 76 number of groups tested 10 and size of set after removing group 335
+At iteration number 77 number of groups tested 11 and size of set after removing group 316
+At iteration number 78 number of groups tested 12 and size of set after removing group 298
+At iteration number 79 number of groups tested 13 and size of set after removing group 281
+At iteration number 80 number of groups tested 2 and size of set after removing group 265
+At iteration number 81 number of groups tested 14 and size of set after removing group 250
+At iteration number 82 number of groups tested 9 and size of set after removing group 236
+At iteration number 83 number of groups tested 11 and size of set after removing group 223
+At iteration number 84 number of groups tested 13 and size of set after removing group 210
+At iteration number 85 number of groups tested 3 and size of set after removing group 198
+At iteration number 86 number of groups tested 14 and size of set after removing group 187
+At iteration number 87 number of groups tested 14 and size of set after removing group 176
+At iteration number 88 number of groups tested 6 and size of set after removing group 166
+At iteration number 89 number of groups tested 4 and size of set after removing group 157
+At iteration number 90 number of groups tested 8 and size of set after removing group 148
+At iteration number 91 number of groups tested 2 and size of set after removing group 140
+At iteration number 92 number of groups tested 4 and size of set after removing group 132
+At iteration number 93 number of groups tested 10 and size of set after removing group 125
+At iteration number 94 number of groups tested 11 and size of set after removing group 118
+At iteration number 95 number of groups tested 9 and size of set after removing group 112
+At iteration number 96 number of groups tested 12 and size of set after removing group 106
+At iteration number 97 number of groups tested 13 and size of set after removing group 100
+At iteration number 98 number of groups tested 8 and size of set after removing group 95
+At iteration number 99 number of groups tested 13 and size of set after removing group 90
+At iteration number 100 number of groups tested 14 and size of set after removing group 85
+At iteration number 101 number of groups tested 14 and size of set after removing group 80
+At iteration number 102 number of groups tested 2 and size of set after removing group 76
+At iteration number 103 number of groups tested 5 and size of set after removing group 72
+At iteration number 104 number of groups tested 8 and size of set after removing group 68
+At iteration number 105 number of groups tested 10 and size of set after removing group 64
+At iteration number 106 number of groups tested 1 and size of set after removing group 61
+At iteration number 107 number of groups tested 2 and size of set after removing group 58
+At iteration number 108 number of groups tested 5 and size of set after removing group 55
+At iteration number 109 number of groups tested 6 and size of set after removing group 52
+At iteration number 110 number of groups tested 13 and size of set after removing group 49
+At iteration number 111 number of groups tested 2 and size of set after removing group 47
+At iteration number 112 number of groups tested 11 and size of set after removing group 45
+At iteration number 113 number of groups tested 11 and size of set after removing group 43
+At iteration number 114 number of groups tested 15 and size of set after removing group 41
+At iteration number 115 number of groups tested 15 and size of set after removing group 39
+At iteration number 116 number of groups tested 15 and size of set after removing group 37
+At iteration number 117 number of groups tested 15 and size of set after removing group 35
+At iteration number 118 number of groups tested 15 and size of set after removing group 33
+At iteration number 119 number of groups tested 4 and size of set after removing group 32
+At iteration number 120 number of groups tested 5 and size of set after removing group 31
+At iteration number 121 number of groups tested 5 and size of set after removing group 30
+At iteration number 122 number of groups tested 8 and size of set after removing group 29
+At iteration number 123 number of groups tested 9 and size of set after removing group 28
+At iteration number 124 number of groups tested 10 and size of set after removing group 27
+At iteration number 125 number of groups tested 11 and size of set after removing group 26
+At iteration number 126 number of groups tested 12 and size of set after removing group 25
+At iteration number 127 number of groups tested 14 and size of set after removing group 24
+At iteration number 128 number of groups tested 15 and size of set after removing group 23
+At iteration number 129 number of groups tested 15 and size of set after removing group 22
+At iteration number 130 number of groups tested 16 and size of set after removing group 21
+At iteration number 131 number of groups tested 17 and size of set after removing group 20
+At iteration number 132 number of groups tested 17 and size of set after removing group 19
+At iteration number 133 number of groups tested 17 and size of set after removing group 18
+At iteration number 134 number of groups tested 17 and size of set after removing group 17
+At iteration number 135 number of groups tested 17 and size of set after removing group 16
+
+Thus for address 3617824027571580336
+The eviction set is 
+2731266573524968591
+3643784879507699318
+2851607285289348226
+4359005195903715701
+1580854837054856987
+419467538545635154
+518268756641873631
+712438214382945701
+2701425169108567755
+4425632194780868925
+3377877072526176922
+4047797323113666790
+2038655500691340343
+3810638875708770406
+2001375855984788242
+4187713477105809641
+
+Now we will prove that this set is indeed an eviction set. For this we will first the target and then read all these addresses, pushing them into the cache.
+Then we hit target at the end and see that its a miss, implying that it got evicted.
+Then we will read target again, and then cyclically go through the set, checking for a hit and then reading it.
+If all WAY+1 of these addresses belong to the same set, we must see misses for each address as reading the previous address will cause the next one to be evicted due to LRU policy
+
+Read Target with Address 3617824027571580336
+Read address 2731266573524968591
+Read address 3643784879507699318
+Read address 2851607285289348226
+Read address 4359005195903715701
+Read address 1580854837054856987
+Read address 419467538545635154
+Read address 518268756641873631
+Read address 712438214382945701
+Read address 2701425169108567755
+Read address 4425632194780868925
+Read address 3377877072526176922
+Read address 4047797323113666790
+Read address 2038655500691340343
+Read address 3810638875708770406
+Read address 2001375855984788242
+Read address 4187713477105809641
+Missed Target! This means it got evicted!
+Missed Address at index 0! This means it got evicted!
+Missed Address at index 1! This means it got evicted!
+Missed Address at index 2! This means it got evicted!
+Missed Address at index 3! This means it got evicted!
+Missed Address at index 4! This means it got evicted!
+Missed Address at index 5! This means it got evicted!
+Missed Address at index 6! This means it got evicted!
+Missed Address at index 7! This means it got evicted!
+Missed Address at index 8! This means it got evicted!
+Missed Address at index 9! This means it got evicted!
+Missed Address at index 10! This means it got evicted!
+Missed Address at index 11! This means it got evicted!
+Missed Address at index 12! This means it got evicted!
+Missed Address at index 13! This means it got evicted!
+Missed Address at index 14! This means it got evicted!
+Missed Address at index 15! This means it got evicted!
+This verifies that we indeed got the eviction set
