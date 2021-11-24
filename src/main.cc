@@ -1254,51 +1254,156 @@ for(int i=0; i<NUM_CPUS; i++)
     random_device rd;
     mt19937_64 e2(rd());
     uniform_int_distribution<uint64_t> dist(llround(pow(2,58)), llround(pow(2,62)));
-    PACKET packets[1024 * 16]; 
-    for ( int i = 0; i < 1024 * 16; i++){
-        cout << i << endl;
+    vector<PACKET> packets( 2*1024 * 16); 
+    for ( int i = 0; i <  2*1024 * 16; i++){
         uint64_t rand_addr = dist(e2);
         packets[i].address = rand_addr;
         packets[i].cpu = 0;
         packets[i].event_cycle = 0;
         packets[i].fill_level = FILL_LLC;
-        uncore.LLC[0]->add_rq(packets + i);
+        uncore.LLC[0]->add_rq(&packets[i]);
         uncore.LLC[0]->operate();
         uncore.DRAM.operate();
-        int way = -1;
-        if ( i > 0){
-            way = uncore.LLC[0]->check_hit(packets + i - 1, 0);
-            cout << i-1 << " " << packets[i-1].address <<" " << way <<endl;
-        }
-        // uncore.LLC[0]->add_rq(packets + i);
-        // cout << i << endl;
-        // uncore.LLC[0]->operate();
+
     }
+    uncore.LLC[0]->operate();
+    uint64_t target_address = packets[0].address;
 
-    uint64_t target_address = dist(e2);
-
-    // cout << endl << endl;
-    // for (int i = 0; i < uncore.LLC[0]->NUM_SET; i++)
-    // {
-    //     for ( int j = 0; j< uncore.LLC[0]->NUM_WAY; j++)
-    //         cout << uncore.LLC[0]->block[i][j].valid << " ";
-    //     cout << endl; 
-    // }
-    // cout<<endl;
 
     int number_conflicts = 0;
-
-    for(int i = 0; i < 1024 * 16; i++)
+    int first_i = -1;
+    for(int i = 0; i < 2*1024 * 16; i++)
     {
-        int way = uncore.LLC[0]->check_hit(packets + i, 0);
-        // cout << i << " " << packets[i].address <<" " << way <<endl;
-        if (way == -1)
+        int way = uncore.LLC[0]->check_hit(&packets[i], 0);
+        if (way == -1) {
             number_conflicts++;
+            if (first_i == -1){
+                first_i = i;
+            }
+        }
         // else 
         //     cout << i << " " << packets[i].address <<" " << way <<endl;
     }   
 
-    cout << "\nNumber of Cache Misses: " << number_conflicts << endl;
+    cout << "Demonstration of GE Algorithm " << endl;
+    cout << "First Index of Packet being missed is: " << first_i << endl;
+    // cout << "\nNumber of Cache Misses: " << number_conflicts << endl;
+
+    cout << "Thus for this packet, there are enough packets in our set that can evict this particular data packet" << endl;
+    cout << "We will find a minimal set of WAY = 16 packets that will evict this packet using GE" << endl;
+
+    PACKET target = packets[first_i];
+    int level = 0;
+
+    while (packets.size() > 16){
+        int chunk_size = packets.size()/(17);
+
+        vector< vector<PACKET> > groups;
+
+        for (size_t i = 0; i < packets.size();  i+= chunk_size) {
+            auto last = min(packets.size(), i + chunk_size);
+            if (level == 0 && i <= first_i && first_i < last){
+                vector<PACKET> cur(packets.begin() + i, packets.begin() + first_i);
+                cur.insert(cur.end(), packets.begin() + first_i + 1, packets.begin() + last);
+                // this is done because we dont want target to be in our set
+                groups.push_back(cur);
+            }
+            else {
+                vector<PACKET> cur(packets.begin() + i, packets.begin() + last);
+                groups.push_back(cur);
+            }
+            
+        }
+
+        bool happen = false;
+        int step = 1;
+        for (int i=0; i<groups.size(); ++i){
+            uncore.LLC[0]->add_rq(&target);
+            uncore.LLC[0]->operate();
+            uncore.DRAM.operate();
+
+            for (int j=0; j<groups.size(); ++j){
+                if (j == i) continue;
+
+                for (PACKET p: groups[j]){
+                    uncore.LLC[0]->add_rq(&p);
+                    uncore.LLC[0]->operate();
+                    uncore.DRAM.operate();
+                }
+            }
+            uncore.LLC[0]->operate();
+
+            // checking if remove group still evicts target
+            int way = uncore.LLC[0]->check_hit(&target, 0);
+
+            if (way == -1){
+                packets.clear();
+                 for (int j=0; j<groups.size(); ++j){
+                    if (j == i) continue;
+
+                    for (PACKET p: groups[j]){
+                        packets.push_back(p);
+                    }
+                }
+                happen = true;
+                break;
+            }
+            step++;
+        }
+        level++;
+        if (!happen){
+            cout << "Unable to finish" << endl;
+            break;
+        }
+
+        cout << "At iteration number " << level << " number of groups considered " << step << " and size of set after removing group " << (int) packets.size() << endl;
+       
+    }
+
+    cout << "\nThus for address " << target.address << " the eviction set is " << endl;
+    for (int i=0; i<packets.size(); ++i){
+        cout << packets[i].address << endl;
+    }
+
+    cout << "Now we will prove that this set is indeed an eviction set. For this we will first the target and then read all these addresses, pushing them into the cache.\nThen we hit target at the end and see that its a miss, implying that it got evicted." << endl;
+    cout << "Then we will read target again, and then cyclically go through the set, checking for a hit and then reading it.\nIf all WAY+1 of these addresses belong to the same set, we must see misses for each address as reading the previous address will cause the next one to be evicted due to LRU policy" << endl;
+
+    uncore.LLC[0]->add_rq(&target);
+    uncore.LLC[0]->operate();
+    uncore.DRAM.operate();
+    cout << "Read Target with Address " << target.address << endl;
+
+    for (int i=0; i<packets.size(); ++i){
+        
+        uncore.LLC[0]->add_rq(&packets[i]);
+        uncore.LLC[0]->operate();
+        uncore.DRAM.operate();
+
+        cout << "Read address " << packets[i].address << endl;
+    }   
+    uncore.LLC[0]->operate();
+    int way = uncore.LLC[0]->check_hit(&target, 0);
+    if (way == -1) {
+        cout << "Missed Target! This means it got evicted!" << endl;
+    }
+    uncore.LLC[0]->add_rq(&target);
+    uncore.LLC[0]->operate();
+    uncore.DRAM.operate();
+
+    for (int i=0; i<packets.size(); ++i){
+        uncore.LLC[0]->operate();
+        int way = uncore.LLC[0]->check_hit(&packets[i], 0);
+        if (way == -1) {
+            cout << "Missed Address at index " << i << "! This means it got evicted!" << endl;
+        }
+
+        uncore.LLC[0]->add_rq(&packets[i]);
+        uncore.LLC[0]->operate();
+        uncore.DRAM.operate();
+
+    } 
+
+    cout << "This verifies that we indeed got the eviction set" << endl;
 
     // ===================== END CODE ==========================
 

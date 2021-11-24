@@ -112,7 +112,9 @@ void MEMORY_CONTROLLER::operate()
         // cout << "Schedule Cycle " << RQ[i].next_schedule_cycle << " Schedule Index " << RQ[i].next_schedule_index << " Size " << RQ[i].SIZE << endl;
         if ((write_mode[i] == 0) && (RQ[i].next_schedule_index < RQ[i].SIZE)) {
             if (RQ[i].next_schedule_cycle <= current_core_cycle[RQ[i].entry[RQ[i].next_schedule_index].cpu]){
+                #ifdef CUSTOM_DEBUG
                 cout << "DRAM Read Scheduled" << endl;
+                #endif
                 schedule(&RQ[i]);
             }
         }
@@ -121,7 +123,9 @@ void MEMORY_CONTROLLER::operate()
 	
         if ((write_mode[i] == 0) && (RQ[i].next_process_index < RQ[i].SIZE)) {
             if (RQ[i].next_process_cycle <= current_core_cycle[RQ[i].entry[RQ[i].next_process_index].cpu]){
+                #ifdef CUSTOM_DEBUG
                 cout << "DRAM request processed" << endl;
+                #endif
                 process(&RQ[i]);
             }
         }
@@ -313,7 +317,9 @@ void MEMORY_CONTROLLER::process(PACKET_QUEUE *queue)
         // check if data bus is available
 
         if (dbus_cycle_available[op_channel] <= current_core_cycle[op_cpu]) {
+            #ifdef CUSTOM_DEBUG
             cout << "Data is being Processed" << endl;
+            #endif
 
             if (queue->is_WQ) {
                 // update data bus cycle time
@@ -491,7 +497,9 @@ int MEMORY_CONTROLLER::add_rq(PACKET *packet)
             RQ[channel].entry[index] = *packet;
             RQ[channel].entry[index].scheduled = 0;
             RQ[channel].occupancy++;
+            #ifdef CUSTOM_DEBUG
             cout << "Adding to RQ " << RQ[channel].occupancy << " Index " << index << endl;
+            #endif
 
 #ifdef DEBUG_PRINT
             uint32_t channel = dram_get_channel(packet->address),
@@ -511,7 +519,9 @@ int MEMORY_CONTROLLER::add_rq(PACKET *packet)
         }
     }
 
+    #ifdef CUSTOM_DEBUG
     cout << "Updating DRAM Schedule Cycle" << endl;
+    #endif
     update_schedule_cycle(&RQ[channel]);
 
     return -1;
@@ -566,7 +576,7 @@ int MEMORY_CONTROLLER::add_pq(PACKET *packet)
 
 void MEMORY_CONTROLLER::return_data(PACKET *packet)
 {
-    cout << "DRAM Returning Data" << endl;
+    // cout << "DRAM Returning Data" << endl;
 }
 
 void MEMORY_CONTROLLER::update_schedule_cycle(PACKET_QUEUE *queue)

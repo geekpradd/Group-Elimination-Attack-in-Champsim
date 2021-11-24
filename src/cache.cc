@@ -417,7 +417,9 @@ if (block[set][way].dirty)
                         	}
                 	#endif
 
+			#ifdef CUSTOM_DEBUG
             cout << "Set " << set << " Way " << way << " Index " << mshr_index << endl;
+			#endif
 			fill_cache(set, way, &MSHR.entry[mshr_index]);
 
 			// RFO marks cache line dirty
@@ -1213,7 +1215,9 @@ void CACHE::handle_read()
 								add_mshr(&RQ.entry[index]);
 								if(lower_level)
 								{
+									#ifdef CUSTOM_DEBUG
 									cout<< "Adding to DRAM" << endl;
+									#endif
 									lower_level->add_rq(&RQ.entry[index]);
 								}
 							
@@ -2125,6 +2129,7 @@ int CACHE::check_hit(PACKET *packet,uint32_t set)
 		     {
 
 			match_way = way;
+			// cout << "got set " << set << endl;
 			cache_hit=1;
 			DP ( if (warmup_complete[packet->cpu]) {
 			if(packet->type==PREFETCH)
@@ -2344,8 +2349,10 @@ int CACHE::add_rq(PACKET *packet)
 			RQ.entry[index].event_cycle += LATENCY;
            }
 	
-
+	#ifdef CUSTOM_DEBUG
     cout << "Added to LLC Read Queue" << endl;
+	#endif
+
 	RQ.occupancy++;
 	RQ.tail++;
 	if (RQ.tail >= RQ.SIZE)

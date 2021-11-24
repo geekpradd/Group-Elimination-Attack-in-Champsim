@@ -1,0 +1,202 @@
+
+*** ChampSim Multicore Out-of-Order Simulator ***
+
+Warmup Instructions: 1000000
+Simulation Instructions: 3000000
+Number of CPUs: 1
+threads:1
+
+L1I Configuration:
+L1I_SET:64
+L1I_WAY:8
+L1I_RQ_SIZE:64
+L1I_WQ_SIZE:64
+L1I_PQ_SIZE:8
+L1I_MSHR_SIZE:8
+
+L1D Configuration:
+L1D_SET:64
+L1D_WAY:12
+L1D_RQ_SIZE:64
+L1D_WQ_SIZE:64
+L1D_PQ_SIZE:8
+L1D_MSHR_SIZE:16
+
+L2C Configuration:
+L2C_SET:1024
+L2C_WAY:8
+L2C_RQ_SIZE:32
+L2C_WQ_SIZE:32
+L2C_PQ_SIZE:16
+L2C_MSHR_SIZE:32
+
+LLC Configuration:
+LLC_SET:2048
+LLC_WAY:16
+LLC SLICES:1
+LLC_RQ_SIZE:32
+LLC_WQ_SIZE:32
+LLC_PQ_SIZE:32
+LLC_MSHR_SIZE:64
+
+Interconnect OFF
+Off-chip DRAM Size: 4096 MB Channels: 1 Width: 64-bit Data Rate: 3200 MT/s
+PAGE SIZE in KB: 4.000000 
+PAGE SIZE in MB: 0.003906 
+PAGE offset in bits: 12 
+CEASER-S_LLC:1
+CEASER_LATENCY:3
+REMAP : ON
+APLR : 100Partitions : 2
+
+CPU 0 runs ./tracer/main.trace.xz
+CPU 0 Bimodal branch predictor
+First Index of Packet being missed1
+
+Number of Cache Misses: 4536
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+Addr 561032338448592224
+got way 6
+something is wrong
+
+CPU 0 Branch Prediction Accuracy: -nan% MPKI: 0 Average ROB Occupancy at Mispredict: -nan
+
+ChampSim completed all CPUs
+
+Region of Interest Statistics
+
+CPU 0 cumulative IPC: -nan instructions: 0 cycles: 0
+ITLB TOTAL     ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+ITLB LOAD      ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+ITLB RFO       ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+ITLB PREFETCH  ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+ITLB WRITEBACK ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+ITLB PREFETCH  REQUESTED:     0  ISSUED:     0  USEFUL:     0  USELESS:     0
+ USEFUL LOAD PREFETCHES:          0 PREFETCH ISSUED TO LOWER LEVEL:          0  ACCURACY: -nan
+ TIMELY PREFETCHES:          0 LATE PREFETCHES: 0 DROPPED PREFETCHES: 0
+ITLB AVERAGE MISS LATENCY: -nan cycles
+
+DTLB TOTAL     ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+DTLB LOAD      ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+DTLB RFO       ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+DTLB PREFETCH  ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+DTLB WRITEBACK ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+DTLB PREFETCH  REQUESTED:     0  ISSUED:     0  USEFUL:     0  USELESS:     0
+ USEFUL LOAD PREFETCHES:          0 PREFETCH ISSUED TO LOWER LEVEL:          0  ACCURACY: -nan
+ TIMELY PREFETCHES:          0 LATE PREFETCHES: 0 DROPPED PREFETCHES: 0
+DTLB AVERAGE MISS LATENCY: -nan cycles
+
+STLB TOTAL     ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+STLB LOAD      ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+STLB RFO       ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+STLB PREFETCH  ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+STLB WRITEBACK ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+STLB PREFETCH  REQUESTED:     0  ISSUED:     0  USEFUL:     0  USELESS:     0
+ USEFUL LOAD PREFETCHES:          0 PREFETCH ISSUED TO LOWER LEVEL:          0  ACCURACY: -nan
+ TIMELY PREFETCHES:          0 LATE PREFETCHES: 0 DROPPED PREFETCHES: 0
+STLB AVERAGE MISS LATENCY: -nan cycles
+
+L1D TOTAL     ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L1D LOAD      ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L1D RFO       ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L1D PREFETCH  ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L1D WRITEBACK ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L1D PREFETCH  REQUESTED:     0  ISSUED:     0  USEFUL:     0  USELESS:     0
+ USEFUL LOAD PREFETCHES:          0 PREFETCH ISSUED TO LOWER LEVEL:          0  ACCURACY: -nan
+ TIMELY PREFETCHES:          0 LATE PREFETCHES: 0 DROPPED PREFETCHES: 0
+L1D AVERAGE MISS LATENCY: -nan cycles
+
+L1I TOTAL     ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L1I LOAD      ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L1I RFO       ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L1I PREFETCH  ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L1I WRITEBACK ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L1I PREFETCH  REQUESTED:     0  ISSUED:     0  USEFUL:     0  USELESS:     0
+ USEFUL LOAD PREFETCHES:          0 PREFETCH ISSUED TO LOWER LEVEL:          0  ACCURACY: -nan
+ TIMELY PREFETCHES:          0 LATE PREFETCHES: 0 DROPPED PREFETCHES: 0
+L1I AVERAGE MISS LATENCY: -nan cycles
+
+L2C TOTAL     ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L2C LOAD      ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L2C RFO       ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L2C PREFETCH  ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L2C WRITEBACK ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+L2C PREFETCH  REQUESTED:     0  ISSUED:     0  USEFUL:     0  USELESS:     0
+ USEFUL LOAD PREFETCHES:          0 PREFETCH ISSUED TO LOWER LEVEL:          0  ACCURACY: -nan
+ TIMELY PREFETCHES:          0 LATE PREFETCHES: 0 DROPPED PREFETCHES: 0
+L2C AVERAGE MISS LATENCY: -nan cycles
+
+LLC0 TOTAL     ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+LLC0 LOAD      ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+LLC0 RFO       ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+LLC0 PREFETCH  ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+LLC0 WRITEBACK ACCESS:     0  HIT:     0  MISS:     0  HIT %:     0  MISS %:     0  AVERAGE MISS PENALTY: 0
+LLC0 PREFETCH  REQUESTED:     0  ISSUED:     0  USEFUL:     0  USELESS:     0
+ USEFUL LOAD PREFETCHES:          0 PREFETCH ISSUED TO LOWER LEVEL:          0  ACCURACY: -nan
+ TIMELY PREFETCHES:          0 LATE PREFETCHES: 0 DROPPED PREFETCHES: 0
+LLC0 AVERAGE MISS LATENCY: -nan cycles
+
+ROI Average ROB Stall Cycles:	-nan
+ROI Total ROB Stalls Cycles:	0
+ROI TOTAL ROB counter      :	0
+ROI Average Load ROB Stall Cycles:	-nan
+ROI Total Load ROB Stalls Cycle  :	0
+ROI Total Load ROB stalls Counter:	0
+Major fault: 0 Minor fault: 0
+Interconnect Stats 
+LINK 0 BW : -nan
+DRAM Statistics
+ CHANNEL 0
+ RQ ROW_BUFFER_HIT:     2  ROW_BUFFER_MISS: 95360
+ DBUS_CONGESTED:     0
+ WQ ROW_BUFFER_HIT:     0  ROW_BUFFER_MISS:     0  FULL:     0
+
+ AVG_CONGESTED_CYCLE: -
+DRAM PAGES: 1048576
+Allocated PAGES: 0
+
+CEASER-S Statistics
+SLICE NO: 0
+Total sets remapped: 0
+Total LLC Stalled: 0
+Total Stall Cycles: 0
+
+L2C destructor called
+L1D destructor called
+L1I destructor called
+STLB destructor called
+DTLB destructor called
+ITLB destructor called
