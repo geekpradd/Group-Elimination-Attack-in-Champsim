@@ -1,0 +1,87 @@
+
+*** ChampSim Multicore Out-of-Order Simulator ***
+
+Warmup Instructions: 1000000
+Simulation Instructions: 1000000
+Number of CPUs: 1
+threads:1
+
+L1I Configuration:
+L1I_SET:64
+L1I_WAY:8
+L1I_RQ_SIZE:64
+L1I_WQ_SIZE:64
+L1I_PQ_SIZE:8
+L1I_MSHR_SIZE:8
+
+L1D Configuration:
+L1D_SET:64
+L1D_WAY:12
+L1D_RQ_SIZE:64
+L1D_WQ_SIZE:64
+L1D_PQ_SIZE:8
+L1D_MSHR_SIZE:16
+
+L2C Configuration:
+L2C_SET:1024
+L2C_WAY:8
+L2C_RQ_SIZE:32
+L2C_WQ_SIZE:32
+L2C_PQ_SIZE:16
+L2C_MSHR_SIZE:32
+
+LLC Configuration:
+LLC_SET:2048
+LLC_WAY:16
+LLC SLICES:1
+LLC_RQ_SIZE:32
+LLC_WQ_SIZE:32
+LLC_PQ_SIZE:32
+LLC_MSHR_SIZE:64
+
+Interconnect OFF
+Off-chip DRAM Size: 4096 MB Channels: 1 Width: 64-bit Data Rate: 3200 MT/s
+PAGE SIZE in KB: 4.000000 
+PAGE SIZE in MB: 0.003906 
+PAGE offset in bits: 12 
+CEASER-S_LLC:1
+CEASER_LATENCY:3
+REMAP : ON
+APLR : 100Partitions : 2
+
+CPU 0 runs ./tracer/main.trace.xz
+CPU 0 Bimodal branch predictor
+Initialize SRRIP state
+0
+Partition 0 Set 1643
+Partition 1 Set 1646
+Adding to DRAM
+Adding to RQ 1
+Updating DRAM Schedule Cycle
+DRAM Read Scheduled
+Event Cycle 0
+DRAM request processed
+Data is being Processed
+Slice 0
+MSHR Fill Cycle 0
+1
+MSHR Index 0
+Partition 1 Set 1646 Way 8
+Set 1646 Way 8 Index 0
+Tag 923208701483421078
+MSHR Fill Cycle 18446744073709551615
+Partition 0 Set 111
+Partition 1 Set 1089
+Adding to DRAM
+Adding to RQ 1
+Updating DRAM Schedule Cycle
+DRAM Read Scheduled
+Event Cycle 0
+DRAM request processed
+Data is being Processed
+Slice 0
+MSHR Fill Cycle 0
+2
+MSHR Index 0
+Partition 1 Set 1089 Way 8
+bimodal-no-no-no-srrip-1-2-1-3-1-0-1core-1core_llc: replacement/llc_replacement.cc:77: void CACHE::llc_update_replacement_state(uint32_t, uint32_t, uint32_t, uint64_t, uint64_t, uint64_t, uint32_t, uint8_t): Assertion `0' failed.
