@@ -122,7 +122,7 @@ void CACHE::handle_fill() //Interconnect done
 #endif
 
 		uint32_t mshr_index = MSHR.next_fill_index;
-		cout << "MSHR Index " << mshr_index << endl;
+		// cout << "MSHR Index " << mshr_index << endl;
 		// find victim
 		uint32_t set = get_set(MSHR.entry[mshr_index].address), way;
                 if(CEASER_S_LLC == 1 && cache_type == IS_LLC)
@@ -134,7 +134,7 @@ void CACHE::handle_fill() //Interconnect done
                         set =ceaser_s_next_set[part];
 					//CEASER_S Replacement policy
                     way = llc_find_victim_ceaser_s(fill_cpu, MSHR.entry[mshr_index].instr_id, set, block[set], MSHR.entry[mshr_index].ip, full_addr, MSHR.entry[mshr_index].type,part);
-                    cout << "Partition " << part << " Set "<< set <<" Way " << way << endl;
+                    // cout << "Partition " << part << " Set "<< set <<" Way " << way << endl;
                 }
 		else if (cache_type == IS_LLC && CEASER_S_LLC != 1) 
 		{
@@ -401,7 +401,8 @@ if (block[set][way].dirty)
 			// update replacement policy
 			if (cache_type == IS_LLC) 
 			{
-				llc_update_replacement_state(fill_cpu, set, way, MSHR.entry[mshr_index].full_addr, MSHR.entry[mshr_index].ip, block[set][way].full_addr, MSHR.entry[mshr_index].type, 0);
+				// cout << "Update Replcament: Set " << set << " Way " << way << " Index " << mshr_index <<endl;
+				llc_update_replacement_state(fill_cpu, set, way, MSHR.entry[mshr_index].full_addr, MSHR.entry[mshr_index].ip, block[set][way].full_addr, 0, 0);
 			}
 			else
 				update_replacement_state(fill_cpu, set, way, MSHR.entry[mshr_index].full_addr, MSHR.entry[mshr_index].ip, block[set][way].full_addr, MSHR.entry[mshr_index].type, 0);
@@ -2054,7 +2055,7 @@ void CACHE::fill_cache(uint32_t set, uint32_t way, PACKET *packet)
 	block[set][way].confidence = packet->confidence;
 
 	block[set][way].tag = packet->address;
-	cout << "Tag " << block[set][way].tag << endl;
+	// cout << "Tag " << block[set][way].tag << endl;
 	set_key(set,way);
 	block[set][way].address = packet->address;
 	block[set][way].full_addr = packet->full_addr;
@@ -2117,7 +2118,7 @@ int CACHE::check_hit(PACKET *packet,uint32_t set)
                                 set =ceaser_s_next_set[cur_part];
             
            	    }
-        cout << "Partition " << cur_part << " Set " << set << endl;
+        // cout << "Partition " << cur_part << " Set " << set << endl;
 		for(uint32_t way=(cur_part * (NUM_WAY/partitions)); way<NUM_WAY && (way < ((cur_part+1) * (NUM_WAY/partitions))); way++) 
 		{
 		     if (block[set][way].valid && (block[set][way].tag == packet->address)) 
@@ -2344,6 +2345,7 @@ int CACHE::add_rq(PACKET *packet)
            }
 	
 
+    cout << "Added to LLC Read Queue" << endl;
 	RQ.occupancy++;
 	RQ.tail++;
 	if (RQ.tail >= RQ.SIZE)
@@ -2730,7 +2732,7 @@ void CACHE::update_fill_cycle()
 		cout << " event: " << MSHR.entry[i].event_cycle << " current: " << current_core_cycle[MSHR.entry[i].cpu] << " next: " << MSHR.next_fill_cycle << endl; });
 	}
 	
-	cout << "MSHR Fill Cycle " << min_cycle << endl;
+	// cout << "MSHR Fill Cycle " << min_cycle << endl;
 	MSHR.next_fill_cycle = min_cycle;
 	MSHR.next_fill_index = min_index;
 	if (min_index < MSHR.SIZE) {

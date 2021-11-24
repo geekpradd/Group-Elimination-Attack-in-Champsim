@@ -1254,7 +1254,7 @@ for(int i=0; i<NUM_CPUS; i++)
     random_device rd;
     mt19937_64 e2(rd());
     uniform_int_distribution<uint64_t> dist(llround(pow(2,58)), llround(pow(2,62)));
-    PACKET packets[1]; 
+    PACKET packets[1024 * 16]; 
     for ( int i = 0; i < 1024 * 16; i++){
         cout << i << endl;
         uint64_t rand_addr = dist(e2);
@@ -1265,11 +1265,11 @@ for(int i=0; i<NUM_CPUS; i++)
         uncore.LLC[0]->add_rq(packets + i);
         uncore.LLC[0]->operate();
         uncore.DRAM.operate();
-        // int way = -1;
-        // if ( i > 0){
-        //     way = uncore.LLC[0]->check_hit(packets + i - 1, 0);
-        //     cout << i-1 << " " << packets[i-1].address <<" " << way <<endl;
-        // }
+        int way = -1;
+        if ( i > 0){
+            way = uncore.LLC[0]->check_hit(packets + i - 1, 0);
+            cout << i-1 << " " << packets[i-1].address <<" " << way <<endl;
+        }
         // uncore.LLC[0]->add_rq(packets + i);
         // cout << i << endl;
         // uncore.LLC[0]->operate();

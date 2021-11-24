@@ -109,6 +109,7 @@ void MEMORY_CONTROLLER::operate()
 
         // handle read
         // schedule new entry
+        // cout << "Schedule Cycle " << RQ[i].next_schedule_cycle << " Schedule Index " << RQ[i].next_schedule_index << " Size " << RQ[i].SIZE << endl;
         if ((write_mode[i] == 0) && (RQ[i].next_schedule_index < RQ[i].SIZE)) {
             if (RQ[i].next_schedule_cycle <= current_core_cycle[RQ[i].entry[RQ[i].next_schedule_index].cpu]){
                 cout << "DRAM Read Scheduled" << endl;
@@ -265,7 +266,7 @@ void MEMORY_CONTROLLER::schedule(PACKET_QUEUE *queue)
         queue->entry[oldest_index].scheduled = 1;
         // queue->entry[oldest_index].event_cycle = current_core_cycle[op_cpu] + LATENCY;
         queue->entry[oldest_index].event_cycle = current_core_cycle[op_cpu];
-        cout << "Event Cycle " << queue->entry[oldest_index].event_cycle << endl;
+        // cout << "Event Cycle " << queue->entry[oldest_index].event_cycle << endl;
 
         update_schedule_cycle(queue);
         update_process_cycle(queue);
@@ -350,7 +351,7 @@ void MEMORY_CONTROLLER::process(PACKET_QUEUE *queue)
                 // upper_level_dcache[op_cpu]->return_data(&queue->entry[request_index]);
                 //@anuj made changes here
                 uint32_t slice = get_slice_num((&queue->entry[request_index])->address);
-                cout << "Slice " << slice << endl;
+                // cout << "Slice " << slice << endl;
                 upper_level_slice[slice]->return_data(&queue->entry[request_index]);    
                 
                 if (bank_request[op_channel][op_rank][op_bank].row_buffer_hit)
@@ -488,8 +489,9 @@ int MEMORY_CONTROLLER::add_rq(PACKET *packet)
         if (RQ[channel].entry[index].address == 0) {
             
             RQ[channel].entry[index] = *packet;
+            RQ[channel].entry[index].scheduled = 0;
             RQ[channel].occupancy++;
-            cout << "Adding to RQ " << RQ[channel].occupancy << endl;
+            cout << "Adding to RQ " << RQ[channel].occupancy << " Index " << index << endl;
 
 #ifdef DEBUG_PRINT
             uint32_t channel = dram_get_channel(packet->address),
@@ -580,12 +582,12 @@ void MEMORY_CONTROLLER::update_schedule_cycle(PACKET_QUEUE *queue)
         cout << " event: " << queue->entry[i].event_cycle << " min_cycle: " << min_cycle << endl;
         });
         */
-
         if (queue->entry[i].address && (queue->entry[i].scheduled == 0) && (queue->entry[i].event_cycle < min_cycle)) {
             min_cycle = queue->entry[i].event_cycle;
             min_index = i;
         }
     }
+
     queue->next_schedule_cycle = min_cycle;
     queue->next_schedule_index = min_index;
     if (min_index < queue->SIZE) {
